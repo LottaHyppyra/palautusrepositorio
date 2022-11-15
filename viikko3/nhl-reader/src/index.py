@@ -25,9 +25,16 @@ def main():
 
     print(f"Players from FIN {datetime.datetime.now()}")
 
+    finns = []
+
     for player in players:
         if player.nationality == "FIN":
-            print(player)
+            finns.append(player)
+
+    finns.sort(key = lambda x: x.get_points(), reverse=True)
+
+    for player in finns:
+        print(player)
 
 if __name__ == "__main__":
     main()
