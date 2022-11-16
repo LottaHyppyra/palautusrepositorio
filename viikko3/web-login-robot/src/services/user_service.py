@@ -44,15 +44,10 @@ class UserService:
         if len(username) < 3 or not re.match("^[a-z]+$", username):
             raise AuthenticationError("Invalid username")
 
-        if len(password) < 8: 
+        if len(password) < 8 or re.match("^[a-z]+$", password): 
             raise AuthenticationError("Invalid password")
 
         if password != password_confirmation:
             raise AuthenticationError("Passwords not matching")
-
-    
-
-        # toteuta loput tarkastukset tänne ja nosta virhe virhetilanteissa
-
 
 user_service = UserService()

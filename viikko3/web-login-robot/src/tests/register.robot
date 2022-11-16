@@ -20,27 +20,58 @@ Register With Too Short Username And Valid Password
     Register Should Fail With Message  Invalid username
 
 Register With Valid Username And Too Short Password
-    Set Username  kayttajatunnus
+    Set Username  testitesti
     Set Password  s
     Set Confirm  s
     Submit Credentials
     Register Should Fail With Message  Invalid password
 
 Register With Nonmatchin Password And Password Confirmation
-    Set Username  kayttajatunnus
+    Set Username  username
     Set Password  salasana1
     Set Confirm  salasana2
     Submit Credentials
     Register Should Fail With Message  Passwords not matching
 
+Login After Succesful Registration
+    Set Username  testinimi
+    Set Password  salasana3
+    Set Confirm  salasana3
+    Submit Credentials
+    Register Should Succeed
+    Go To Login Page
+    Set Username  testinimi
+    Set Password  salasana3
+    Submit Credentials Login
+    Main Page Should Be Open
+
+Login After Failed Registration
+    Set Username  failtesti
+    Set Password  f
+    Set Confirm  f
+    Submit Credentials
+    Register Should Fail With Message  Invalid password
+    Go To Login Page
+    Set Username  failtesti
+    Set Password  f
+    Submit Credentials Login
+    Login Should Fail With Message  Invalid username or password
+
+
 *** Keywords ***
 Register Should Succeed
-    Title Should Be  Welcome to Ohtu Application!
+    Welcome Page Should Be Open
+
+Login Should Succeed
+    Main Page Should Be Open
 
 Register Should Fail With Message
     [Arguments]  ${message}
     Register Page Should Be Open
     Page Should Contain  ${message}
+
+Submit Credentials Login
+    Click button  Login
 
 Submit Credentials
     Click Button  Register
@@ -56,3 +87,8 @@ Set Password
 Set Confirm
     [Arguments]  ${password}
     Input Password  password_confirmation  ${password}
+
+Login Should Fail With Message
+    [Arguments]  ${message}
+    Login Page Should Be Open
+    Page Should Contain  ${message}
