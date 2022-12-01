@@ -26,10 +26,15 @@ class Nollaus():
     def __init__(self, sovelluslogiikka):
         self.sovelluslogiikka = sovelluslogiikka
 
+    def suorita(self, syote):
+        self.sovelluslogiikka.nollaa()
 
 class Kumoa():
     def __init__(self, sovelluslogiikka):
         self.sovelluslogiikka = sovelluslogiikka
+
+    def suorita(self, syote):
+        self.sovelluslogiikka.kumoa()
 
 
 class Kayttoliittyma:
