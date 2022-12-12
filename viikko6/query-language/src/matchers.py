@@ -14,8 +14,15 @@ class QueryBuilder:
         self._query = And(HasFewerThan(value, attr), self._query)
         return self
 
+    def oneOf(self, q1, q2):
+        self._query = Or(q1, q2)
+        return self
+
     def build(self):
-        return self._query
+        query = self._query
+        self._query = All()
+
+        return query
 
 class And:
     def __init__(self, *matchers):
